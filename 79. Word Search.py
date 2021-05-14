@@ -43,8 +43,8 @@ class Solution:
             board[i][j] = original
             return valid
 
-        for i in range(0, len(board)):
-            for j in range(0, len(board[0])):
+        for i in range(len(board)):
+            for j in range(len(board[0])):
                 if board[i][j] == word[0]:
                     if dfs(i, j, 0):
                         return True
