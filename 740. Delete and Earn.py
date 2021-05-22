@@ -39,3 +39,16 @@ class Solution:
             take_prev = take_current
             not_take_prev = not_take_current
         return max(take_prev, not_take_prev)
+
+
+class Solution:
+    def deleteAndEarn(self, nums: List[int]) -> int:
+        arr = [0] * 10001
+        for num in nums:
+            arr[num] += num
+        take_prev_one, take_prev_two = 0, 0
+        for num in arr:
+            temp = take_prev_one
+            take_prev_one = max(take_prev_two + num, take_prev_one)
+            take_prev_two = temp
+        return take_prev_one
