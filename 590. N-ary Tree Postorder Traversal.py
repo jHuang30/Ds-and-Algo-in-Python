@@ -38,3 +38,19 @@ class Solution:
 
         dfs(root)
         return self.res
+
+# bfs:
+
+
+class Solution:
+    def postorder(self, root: 'Node') -> List[int]:
+        res = []
+        stack = [root]
+        while stack:
+            current = stack.pop()
+            if current:
+                res.insert(0, current.val)
+                for child in current.children:
+                    stack.append(child)
+
+        return res
