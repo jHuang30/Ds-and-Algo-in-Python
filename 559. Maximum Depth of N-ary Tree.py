@@ -27,10 +27,9 @@ class Solution:
     def maxDepth(self, root: 'Node') -> int:
         if not root:
             return 0
-        elif not len(root.children):
+        if not root.children:
             return 1
-        else:
-            height = []
-            for child in root.children:
-                height.append(self.maxDepth(child))
-            return max(height) + 1
+        height = []
+        for child in root.children:
+            height.append(self.maxDepth(child))
+        return max(height) + 1
