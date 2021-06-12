@@ -42,6 +42,7 @@ class Solution:
     def closestValue(self, root: TreeNode, target: float) -> int:
         res = root.val
         while root:
+            # res = min(root.val, res, key = lambda x: abs(target - x))
             if abs(res - target) > abs(root.val - target):
                 res = root.val
             root = root.left if root.val > target else root.right
