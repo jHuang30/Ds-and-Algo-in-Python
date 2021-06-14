@@ -33,3 +33,22 @@ class Solution:
             return left + right + 1
         else:
             return min(left, right) + 1
+
+# bfs
+
+
+class Solution:
+    def minDepth(self, root: TreeNode) -> int:
+        if not root:
+            return 0
+        queue = [[root, 1]]
+        while queue:
+            [current, level] = queue.pop(0)
+            if not current.left and not current.right:
+                return level
+            if current.left:
+                queue.append([current.left, level + 1])
+            if current.right:
+                queue.append([current.right, level + 1])
+
+        return level
