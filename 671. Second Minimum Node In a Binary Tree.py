@@ -27,6 +27,24 @@
 
 class Solution:
     def findSecondMinimumValue(self, root: TreeNode) -> int:
+        self.first = root.val
+        self.second = -1
+
+        def dfs(root):
+            if not root:
+                return
+            if root.val < self.first:
+                self.second = self.first
+                self.first = root.val
+            elif (root.val < self.second or self.second == -1) and root.val != self.first:
+                self.second = root.val
+            dfs(root.left)
+            dfs(root.right)
+        dfs(root)
+        return self.second
+        
+class Solution:
+    def findSecondMinimumValue(self, root: TreeNode) -> int:
         root_min = root.val
 
         def dfs(root):
