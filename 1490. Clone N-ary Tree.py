@@ -44,3 +44,10 @@ class Solution:
         for child in root.children:
             copy_root.children.append(self.cloneTree(child))
         return copy_root
+
+
+class Solution:
+    def cloneTree(self, root: 'Node') -> 'Node':
+        if not root:
+            return None
+        return Node(root.val, [self.cloneTree(child) for child in root.children])
