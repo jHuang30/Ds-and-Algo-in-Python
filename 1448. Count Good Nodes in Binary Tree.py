@@ -50,3 +50,16 @@ class Solution:
                 queue.append([current.right, max(max_val, current.val)])
 
         return res
+
+# dfs
+class Solution:
+    def goodNodes(self, root: TreeNode) -> int:
+
+        def dfs(root, max_val):
+            if not root:
+                return 0
+            max_val = max(max_val, root.val)
+            return dfs(root.left, max_val) + dfs(root.right, max_val) + (1 if root.val >= max_val else 0)
+            # return dfs(root.left, max_val) + dfs(root.right, max_val) + (root.val >= max_val)
+
+        return dfs(root, float("-inf"))
