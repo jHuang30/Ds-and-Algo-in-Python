@@ -41,3 +41,32 @@ class Solution:
             union(x, y)
 
         return len([1 for idx, item in enumerate(arr) if idx == item])
+
+
+class Solution:
+    def countComponents(self, n: int, edges: List[List[int]]) -> int:
+        uniq_set = set()
+        res = 0
+
+        def dfs(i, pairs):
+            nonlocal uniq_set
+            if i in pairs:
+                for j in pairs[i]:
+                    if not j in uniq_set:
+                        uniq_set.add(j)
+                        dfs(j, pairs)
+
+        pairs = {}
+        for [x, y] in edges:
+            if not x in pairs:
+                pairs[x] = set()
+            if not y in pairs:
+                pairs[y] = set()
+            pairs[x].add(y)
+            pairs[y].add(x)
+
+        for i in range(n):
+            if not i in uniq_set:
+                res += 1
+                dfs(i, pairs)
+        return res
