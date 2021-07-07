@@ -48,13 +48,47 @@ class Codec:
             if not data:
                 return
             current = data.pop(0)
-            root = TreeNode()
             if current == 'None':
-                root = None
-                return
-            root.val = current
+                return None
+            root = TreeNode(current)
             root.left = dfs(data)
             root.right = dfs(data)
             return root
 
         return dfs(data)
+
+
+
+# using min and max to determin if it's the leaf of the tree
+
+class Codec:
+
+    def serialize(self, root: TreeNode) -> str:
+        """Encodes a tree to a single string.
+        """
+        res = []
+
+        def pre_order(root):
+            if not root:
+                return
+            res.append(str(root.val))
+            pre_order(root.left)
+            pre_order(root.right)
+
+        pre_order(root)
+        return ' '.join(res)
+
+    def deserialize(self, data: str) -> TreeNode:
+        """Decodes your encoded data to tree.
+        """
+        vals = [int(i) for i in data.split()]
+
+        def dfs(min_val, max_val):
+            if vals and (min_val < vals[0] < max_val):
+                current = vals.pop(0)
+                root = TreeNode(current)
+                root.left = dfs(min_val, current)
+                root.right = dfs(current, max_val)
+                return root
+
+        return dfs(float('-inf'), float('inf'))
