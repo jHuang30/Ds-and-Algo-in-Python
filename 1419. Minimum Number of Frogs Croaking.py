@@ -59,3 +59,26 @@ class Solution:
             letter_freq[char] += 1
 
         return res if current_num == 0 else -1
+
+
+# using index and arr:
+
+class Solution:
+    def minNumberOfFrogs(self, croakOfFrogs: str) -> int:
+        if len(croakOfFrogs) % 5:
+            return -1
+        letter_freq = [0] * 5
+        current_num = 0
+        res = 0
+        for char in croakOfFrogs:
+            idx = 'croak'.index(char)
+            if idx == 0:
+                current_num += 1
+                res = max(res, current_num)
+            elif letter_freq[idx] == letter_freq[idx - 1]:
+                return -1
+            elif idx == 4:
+                current_num -= 1
+            letter_freq[idx] += 1
+
+        return res if current_num == 0 else -1
