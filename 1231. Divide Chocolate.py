@@ -43,7 +43,7 @@ class Solution:
                     current = 0
                 else:
                     current += sweet
-            if pieces > k:
+            if pieces >= k + 1:
                 l = mid
             else:
                 r = mid - 1
