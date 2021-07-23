@@ -37,19 +37,10 @@ class Solution:
         num_with_larger = {}
         stack = []
         for num in nums2:
-            if not stack:
-                stack.append(num)
-            while stack:
-                if stack[-1] < num:
-                    num_with_larger[stack.pop()] = num
-                else:
-                    break
+            while stack and stack[-1] < num:
+                num_with_larger[stack.pop()] = num
             stack.append(num)
         res = []
         for num in nums1:
-            if num in num_with_larger:
-                res.append(num_with_larger[num])
-            else:
-                res.append(-1)
-        return res
-                
+            res.append(num_with_larger.get(num, -1))
+        return res                
