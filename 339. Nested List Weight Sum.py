@@ -35,3 +35,18 @@ class Solution:
         
         dfs(nestedList, 1)
         return self.res
+
+# bfs:
+
+class Solution:
+    def depthSum(self, nestedList: List[NestedInteger]) -> int:
+        res, depth = 0, 1
+        while nestedList:
+            for i in range(len(nestedList)):
+                current = nestedList.pop(0)
+                if current.isInteger():
+                    res += current.getInteger() * depth
+                else:
+                    nestedList += current.getList()
+            depth += 1
+        return res
