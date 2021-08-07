@@ -25,25 +25,7 @@
 # 1 <= m, n <= 300
 # matrix[i][j] is '0' or '1'.
 
-class Solution:
-    def maximalSquare(self, matrix: List[List[str]]) -> int:
-        dp = [0] * len(matrix[0])
-        max_len = 0
-        prev = 0
-        for i in range(len(matrix)):
-            for j in range(len(matrix[0])):
-                temp = dp[j]
-                if i == 0 or j == 0:
-                    dp[j] = int(matrix[i][j])
-                elif matrix[i][j] == '1':
-                    dp[j] = min(dp[j], dp[j - 1], prev) + 1
-                else:
-                    dp[j] = 0
-                max_len = max(max_len, dp[j])
-                prev = temp
-        return max_len * max_len
-
-
+#2d
 class Solution:
     def maximalSquare(self, matrix: List[List[str]]) -> int:
         dp = [[0] * len(matrix[0]) for _ in range(len(matrix))]
@@ -57,3 +39,21 @@ class Solution:
                 res = max(res, dp[i][j] * dp[i][j])
                     
         return res
+
+class Solution:
+    def maximalSquare(self, matrix: List[List[str]]) -> int:
+        dp = [0] * len(matrix[0])
+        prev = 0
+        res = 0
+        for i in range(len(matrix)):
+            for j in range(len(matrix[0])):
+                temp = dp[j]
+                if i == 0 or j == 0 or matrix[i][j] == '0':
+                    dp[j] = int(matrix[i][j])
+                else:
+                    dp[j] = min(dp[j - 1], dp[j], prev) + 1
+                res = max(res, dp[j] * dp[j])
+                prev = temp
+                
+        return res
+
