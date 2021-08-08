@@ -38,3 +38,17 @@ class Solution:
         nums.sort()
         return min(nums[-1] - nums[3], nums[-2] - nums[2], nums[-3] - nums[1], nums[-4] - nums[0])
         
+
+# suit for questions if given a k instead of 3. 4 can be changed to be k + 1
+class Solution:
+    def minDifference(self, nums: List[int]) -> int:
+        if len(nums) <= 4:
+            return 0
+        min_val = float('inf')
+        nums.sort()
+        i, j = 0, len(nums) - 4
+        while j < len(nums):
+            min_val = min(min_val, nums[j] - nums[i])
+            i += 1
+            j += 1
+        return min_val 
