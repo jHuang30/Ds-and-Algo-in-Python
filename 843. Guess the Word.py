@@ -52,3 +52,16 @@ class Solution:
             guess = random.choice(wordlist)
             num = master.guess(guess)
             wordlist = [word for word in wordlist if compare(guess, word) == num]
+
+
+class Solution:
+    def findSecretWord(self, wordlist: List[str], master: 'Master') -> None:
+        def compare(word1, word2):
+            return sum(i == j  for i, j in zip(word1, word2))
+        
+        num = 0
+        while num < 6:
+            count = [collections.Counter(word[i] for word in wordlist) for i in range(6)]
+            guess_word = max(wordlist, key = lambda word: sum(count[idx][char] for idx, char in enumerate(word)) )
+            num = master.guess(guess_word)
+            wordlist = [word for word in wordlist if compare(guess_word, word) == num]
