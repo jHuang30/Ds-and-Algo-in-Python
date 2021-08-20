@@ -53,6 +53,47 @@
 # targetPath[i].length == 3
 # targetPath[i] consists of upper-case English letters.
 
+
+# lte：
+
+# class Solution:
+#     def mostSimilar(self, n: int, roads: List[List[int]], names: List[str], targetPath: List[str]) -> List[int]:
+#         visited = [[0] * len(targetPath) for _ in range(n)]
+#         best_candidate = [[0] * len(targetPath) for _ in range(n)]
+#         dic = defaultdict(list)
+#         for x, y in roads:
+#             dic[x].append(y)
+#             dic[y].append(x)
+#         min_path = float('inf')
+        
+#         def dfs(name_idx, path_idx):
+#             if visited[name_idx][path_idx]:
+#                 return visited[name_idx][path_idx]
+#             edit_dis = int(names[name_idx] != targetPath[path_idx])
+#             if path_idx == len(targetPath) - 1:
+#                 return edit_dis
+#             min_dis = float('inf')
+#             for neighbor in dic[name_idx]:
+#                 next_cost = dfs(neighbor, path_idx + 1)
+#                 if next_cost < min_dis:
+#                     min_dis = next_cost
+#                     best_candidate[name_idx][path_idx] = neighbor
+#             visited[name_idx][path_idx] = min_dis + edit_dis
+#             return edit_dis + min_dis
+            
+#         start = 0
+#         res = []
+#         for i in range(len(names)):
+#             cost = dfs(i, 0)
+#             if cost < min_path:
+#                 min_path = cost
+#                 start = i
+#         while len(res) < len(targetPath):
+#             res.append(start)
+#             start = best_candidate[start][len(res) - 1]
+#         return res
+        
+            
 class Solution:
     def mostSimilar(self, n: int, roads: List[List[int]], names: List[str], targetPath: List[str]) -> List[int]:
         dic = defaultdict(list)
