@@ -61,3 +61,20 @@ class Solution:
                 cows += min(guessHsh[num], secretHsh[num])
 
         return str(bulls) + 'A' + str(cows) + 'B'
+
+
+class Solution:
+    def getHint(self, secret: str, guess: str) -> str:
+        dic = collections.Counter(secret)
+        common_letters = 0
+        for num in guess:
+            if dic[num] > 0:
+                common_letters += 1
+                dic[num] -= 1
+        a_num = 0
+        for i in range(len(secret)):
+            if secret[i] == guess[i]:
+                a_num += 1
+        b_num = common_letters - a_num
+        
+        return str(a_num) + 'A' + str(b_num) + 'B'
