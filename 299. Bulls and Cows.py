@@ -52,7 +52,6 @@ class Solution:
             if secret[i] == guess[i]:
                 bulls += 1
             else:
-                print(guessHsh)
                 guessHsh[guess[i]] = guessHsh.get(guess[i], 0) + 1
                 secretHsh[secret[i]] = secretHsh.get(secret[i], 0) + 1
 
