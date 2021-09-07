@@ -30,24 +30,18 @@
 
 class Solution:
     def checkRecord(self, s: str) -> bool:
-        consecutive_late = 0
+        total_late = 0
         total_absent = 0
         for st in s:
             if st == 'A':
-                if total_absent != 0:
-                    return False
-                else:
-                    total_absent = 1
-                    consecutive_late = 0
+                total_absent += 1
             if st == 'L':
-                if consecutive_late == 2:
-                    return False
-                else:
-                    consecutive_late += 1
-            if st == 'P':
-                consecutive_late = 0
+                total_late += 1
+            else:
+                total_late = 0
+            if total_absent > 1 or total_late > 2:
+                return False
         return True
-
 class Solution:
     def checkRecord(self, s: str) -> bool:
         return s.count('A') < 2 and s.count('LLL') == 0
