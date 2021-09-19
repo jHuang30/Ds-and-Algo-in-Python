@@ -31,6 +31,22 @@
 class SnapshotArray:
 
     def __init__(self, length: int):
+        self.pairs = {}
+        self.snaps = []
+
+    def set(self, index: int, val: int) -> None:
+        self.pairs[index] = val
+
+    def snap(self) -> int:
+        self.snaps.append(self.pairs.copy())
+        return len(self.snaps) - 1
+
+    def get(self, index: int, snap_id: int) -> int:
+        return self.snaps[snap_id][index] if index in self.snaps[snap_id] else 0
+
+class SnapshotArray:
+
+    def __init__(self, length: int):
         self.arr = [[[-1, 0]] for _ in range(length)]
         self.id = 0
 
@@ -42,7 +58,5 @@ class SnapshotArray:
         return self.id - 1
 
     def get(self, index: int, snap_id: int) -> int:
-        # print(self.arr)
         idx = bisect.bisect_right(self.arr[index], [snap_id + 1]) - 1
-        # print(idx)
         return self.arr[index][idx][1]
