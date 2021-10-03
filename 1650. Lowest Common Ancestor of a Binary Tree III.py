@@ -50,3 +50,11 @@ class Solution:
             else:
                 q = q.parent
         return None
+
+class Solution:
+    def lowestCommonAncestor(self, p: 'Node', q: 'Node') -> 'Node':
+        p1, q1 = p, q
+        while p1 != q1:
+            p1 = p1.parent if p1.parent else q
+            q1 = q1.parent if q1.parent else p
+        return p1
