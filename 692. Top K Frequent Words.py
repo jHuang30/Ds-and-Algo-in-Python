@@ -23,3 +23,8 @@ class Solution:
         freq = collections.Counter(words)
         print(freq)
         return heapq.nsmallest(k, freq, key=lambda word: (~freq[word], word))
+
+
+class Solution:
+    def kClosest(self, points: List[List[int]], k: int) -> List[List[int]]:
+        return heapq.nsmallest(k, points, key = lambda point: point[0]**2 + point[1]**2)
