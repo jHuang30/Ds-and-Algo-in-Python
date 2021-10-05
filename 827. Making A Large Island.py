@@ -82,14 +82,14 @@ class Solution:
         for i in range(n):
             for j in range(n):
                 ans = 0
-                seen = {}
+                seen = set()
                 directions = [(1, 0), (-1, 0), (0, 1), (0, -1)]
                 if grid[i][j] == 0:
                     for dx, dy in directions:
                         x = i + dx
                         y = j + dy
                         if 0 <= x < n and 0 <= y < n and grid[x][y] not in seen :
-                            seen[grid[x][y]] = True
+                            seen.add(grid[x][y])
                             ans += idx_with_islands[grid[x][y]]
                 res = max(res, ans + 1)
         return res
